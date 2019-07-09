@@ -1,0 +1,575 @@
+swagger: '2.0'
+
+info:
+  version: 1.0.0
+  title: "Opportunity GacCollection Type"
+  description: "Opportunities and related data such as products, sales teams and parties involved and sales activities performed."
+
+schemes:
+  - https
+host: "my329276.crm.ondemand.com"
+basePath: /odata/cust/v1/opportunitygacservice/OpportunityCollection
+tags: 
+- name: "API Environment "
+  description: "sandbox"
+  externalDocs:
+    description: Configure Environments
+    url: "http://swagger.io"
+
+paths:
+  /OpportunityCollection:
+    get:
+      tags:
+      - "API Environment "
+      summary:  "(Get Opportunity entries)"
+      description: "Get entities from entity set OpportunityAppointmentSalesActivityCollection"
+      parameters:
+      - name: "$top"
+        in: query
+        type: integer
+        description: "Show only first n elements, see OdataPaging"
+        
+      - name: "$skip"
+        in: query
+        type: integer
+        description: "Skip the first n elements, see OdataPaging"
+
+      - name: "$orderby"
+        in: query
+        type: string
+        description: "Order by property values, see OData Sorting"
+
+      - name: "$search"
+        in: query
+        type: string
+        description: "Search elements by search phrases, see OData Searching"
+
+      responses:
+        200:
+          description: "EntitySet OpportunityCollection"
+          schema: 
+            $ref: '#/definitions/opp_entity'
+            
+        default:
+          description: "Unexpected Error"
+          schema: 
+            $ref: '#/definitions/error'
+      
+      security:
+      - UserSecurity: []
+    post:
+      tags:
+      - "API Environment "
+
+      summary:  "(Post Opportunity entries)"
+      description: "Post a new entity to entity set OpportunityCollection"
+      parameters:
+      - name: OpportunityCollection
+        in: body 
+        description:  "The new Entity"
+        schema:
+          $ref: '#/definitions/opp_entity'        
+      responses:
+        201:
+          description: "Created Entity"
+          schema: 
+            type: string
+            example: "Created Entity"
+        default:
+          description: "Unexpected Error"
+          schema: 
+            $ref: '#/definitions/error'
+            
+  
+  /OpportunityCollection/ID:
+    get:
+      tags:
+      - "API Environment "
+      summary:  "(Get Opportunity entry by key)"
+      description: "Returns the entity with the key from OpportunityAppointmentSalesActivityCollection"
+      parameters:
+      - name: "Opportunity_ID"
+        in: path
+        type: integer
+        format: int64
+        description: "Key : Opportunity_ID"
+        required: true
+
+      responses:
+        200:
+          description: "EntitySet OpportunityCollection"
+          schema: 
+            $ref: '#/definitions/opp_entity'
+        default:
+          description: "Unexpected Error"
+          schema: 
+            $ref: '#/definitions/error'      
+    patch:
+      tags:
+      - "API Environment "
+      summary:  "(Update Entity in Entity-Set : OpportunityCollection)"
+      description: "Update entity in EntitySet OpportunityAppointmentSalesActivityCollection"
+      parameters:
+      - name: "ObjectID"
+        in: path
+        type: string
+        description: "Key : ObjectID"
+        required: true
+        
+      - name: OpportunityCollection
+        in: body 
+        description:  "Entity to patch"
+        schema:
+          $ref: '#/definitions/opp_entity'
+
+      responses:
+        204:
+          description: "Empty response"
+          schema: 
+            type: string
+            example: "Empty Response"
+          
+        default:
+          description: "Unexpected Error"
+          schema: 
+            $ref: '#/definitions/error'
+    delete:
+      tags:
+      - "API Environment "
+      summary:  "(Delete Opportunity Entities)"
+      description: "Get entities from entity set OpportunityAppointmentSalesActivityCollection"
+      parameters:
+      - name: "ObjectID"
+        in: path
+        type: string
+        description: "Key : ObjectID"
+        required: true
+        
+      - name: "$If-Match"
+        in: header
+        type: string
+        description: "If-Match header"
+
+      responses:
+        204:
+          description: "Empty response"
+          schema: 
+            type: string
+            example: Empty response
+          
+        default:
+          description: "Unexpected Error"
+          schema: 
+            $ref: '#/definitions/error'
+
+
+securityDefinitions:
+  UserSecurity:
+    type: basic
+    
+definitions:
+  opp_entity:
+          properties:
+            results:
+              type: array
+              items:
+                type: object
+                properties:
+                  __metadata:
+                    type: object
+                    properties:
+                      uri:
+                        type: string
+                      type:
+                        type: string
+                  
+                  ObjectID:
+                    type: string
+                  
+                  ETag:
+                    type: string
+                  
+                  ApprovalStatusCode:
+                    type: string
+                  
+                  ApprovalStatusCodeText:
+                    type: string
+                  
+                  LastChangeDate:
+                    type: string
+                  
+                  OpportunityID:
+                    type: string
+                  
+                  UUID:
+                    type: string
+                  
+                  ProbabilityPercent:
+                    type: string
+    
+                  ExpectedValue:
+                    type: object
+                    properties:
+                      __metadata:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                      languageCode:
+                        type: string
+                      content:
+                        type: string
+                      
+                  WeightedValue:
+                    type: object
+                    properties:
+                      __metadata:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                      languageCode:
+                        type: string
+                      content:
+                        type: string
+                      
+                  TotalNegotiatedValue:
+                    type: object
+                    properties:
+                      __metadata:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                      languageCode:
+                        type: string
+                      content:
+                        type: string
+
+                  StartDate:
+                    type: string
+                  
+                  CloseDate:
+                    type: string
+                  
+                  Name:
+                    type: object
+                    properties:
+                      __metadata:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                      languageCode:
+                        type: string
+                      content:
+                        type: string
+                      
+                  AccountUUID:
+                    type: string
+                  
+                  AccountID:
+                    type: string
+                  
+                  PrimaryContactUUID:
+                    type: string
+                  
+                  PrimaryContactID:
+                    type: string
+                  
+                  OwnerUUID:
+                    type: string
+                  
+                  ChangedOn:
+                    type: string
+                  
+                  CreatedOn:
+                    type: string
+                  
+                  ChangedByUUID:
+                    type: string
+                    
+                  CreatedByUUID:
+                    type: string
+                    
+                  ChangedBy:
+                    type: string
+                    
+                  CreatedByFormattedName:
+                    type: string
+                    
+                  SalesOrganisationID:
+                    type: string
+                    
+                  SalesOrganisationUUID:
+                    type: string
+                    
+                  SalesTerritoryID:
+                    type: string
+                    
+                  SalesTerritoryUUID:
+                    type: string
+                    
+                  PublishToForecast:
+                    type: boolean
+                    
+                  SalesGroupID:
+                    type: string
+                    
+                  AccountName:
+                    type: object
+                    properties:
+                      __metadata:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                      languageCode:
+                        type: string
+                      content:
+                        type: string
+                      
+                    
+                  OwnerID:
+                    type: string
+                    
+                  OwnerName:
+                    type: object
+                    properties:
+                      __metadata:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                      languageCode:
+                        type: string
+                      content:
+                        type: string
+                      
+                    
+                  PrimaryContactName:
+                    type: object
+                    properties:
+                      __metadata:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                      languageCode:
+                        type: string
+                      content:
+                        type: string
+                      
+                    
+                  SalesUnitUUID:
+                    type: string
+                    
+                  SalesCycleCode:
+                    type: string
+                    
+                  SalesCycleCodeText:
+                    type: string
+                    
+                  SalesPhaseCode:
+                    type: string
+                    
+                  SalesPhaseCodeText:
+                    type: string
+                    
+                  StatusCode:
+                    type: string
+                    
+                  StatusCodeText:
+                    type: string
+                    
+                  PriorityCode:
+                    type: string
+
+                  PriorityCodeText:
+                    type: string
+
+                  ConsistencyStatusCode:
+                    type: string
+
+                  ConsistencyStatusCodeText:
+                    type: string
+
+                  CategoryCode:
+                    type: string
+
+                  CategoryCodeText:
+                    type: string
+
+                  ProgressCode:
+                    type: string
+
+                  ProgressCodeText:
+                    type: string
+
+                  DistributionChannelCode:
+                    type: string
+
+                  DistributionChannelCodeText:
+                    type: string
+
+                  DivisionCode:
+                    type: string
+
+                  DivisionCodeText:
+                    type: string
+
+                  DocumentTypeCode:
+                    type: string
+
+                  DocumentTypeCodeText:
+                    type: string
+
+                  ForecastCategoryCode:
+                    type: string
+
+                  ForecastCategoryCodeText:
+                    type: string
+
+                  SourceCode:
+                    type: string
+
+                  SourceCodeText:
+                    type: string
+
+                  ReasonForStatusCode:
+                    type: string
+
+                  ReasonForStatusCodeText:
+                    type: string
+
+                  CustomStatusCode:
+                    type: string
+
+                  CustomStatusCodeText:
+                    type: string
+
+                  OpportunityTaskSalesActivity:
+                    type: object
+                    properties:
+                      __deferred: 
+                        type: object
+                        properties:
+                          uri:
+                            type: string
+                      
+
+                  OpportunitySalesTeam:
+                    type: object
+                    properties:
+                      __deferred: 
+                        type: object
+                        properties:
+                          uri:
+                            type: string
+
+                  OpportunityProduct:
+                    type: object
+                    properties:
+                      __deferred: 
+                        type: object
+                        properties:
+                          uri:
+                            type: string
+
+                  OpportunityInvolvedParties:
+                    type: object
+                    properties:
+                      __deferred: 
+                        type: object
+                        properties:
+                          uri:
+                            type: string
+
+                  OpportunityAppointmentSalesActivity:
+                    type: object
+                    properties:
+                      __deferred: 
+                        type: object
+                        properties:
+                          uri:
+                            type: string
+                      
+
+                  OpportunityPhoneCallSalesActivity:
+                    type: object
+                    properties:
+                      __deferred: 
+                        type: object
+                        properties:
+                          uri:
+                            type: string
+                      
+
+                  OpportunityEMailSalesActivity:
+                    type: object
+                    properties:
+                      __deferred: 
+                        type: object
+                        properties:
+                          uri:
+                            type: string
+                      
+
+                  OpportunityAttachment:
+                    type: object
+                    properties:
+                      __deferred: 
+                        type: object
+                        properties:
+                          uri:
+                            type: string
+                      
+                  OpportunityNotes:
+                    type: object
+                    properties:
+                      __deferred: 
+                        type: object
+                        properties:
+                          uri:
+                            type: string
+
+                  OpportunityContact:
+                    type: object
+                    properties:
+                      __deferred: 
+                        type: object
+                        properties:
+                          uri:
+                            type: string
+
+                  OpportunityBusinessDocumentReference:
+                    type: object
+                    properties:
+                      __deferred: 
+                        type: object
+                        properties:
+                          uri:
+                            type: string
+
+  error:
+    properties:
+      error:
+        type: object
+        properties:
+          code:
+            type: string
+          message:
+            type: string
+          target:
+            type: string    
+          details:
+            type: array
+            items:
+              type: object
+              properties:
+                code:
+                  type: string
+                message:
+                  type: string
+                target:
+                  type: string
