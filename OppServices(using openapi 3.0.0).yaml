@@ -1,0 +1,1062 @@
+openapi: 3.0.0
+info:
+  title: Opportunity Service
+  description: API to Schlumberger's Opportunity Service Data
+  version: 0.1.9
+  
+servers:
+  - url: https://my329276.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi
+    description: API to Schlumberger's Opportunity Service Data
+
+paths:
+  /Opportunities:
+    get:
+      tags:
+      - "API Environment "
+      summary:  "(Get Opportunity entries)"
+      description: "Returns a collection of opportunities"
+      parameters:
+      - name: "limit"
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Number of entries to fetch"
+        
+        
+      - name:        revEndDate
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Revenue End Date"
+        
+
+      - name:        revStartDate
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Revenue Start Date"
+        
+
+      - name:        ID
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "C4C Opportunity ID"
+        
+
+      - name:        opportunityName
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Name of opportunity"
+        
+        
+      - name:        accountID
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Account ID"
+        
+        
+      - name:        salesCycle
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Sales Cycle"
+        
+      - name:        salesCycleText
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Sales Cycle Text"
+        
+      - name:        salesStageCode
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Code associated with the Sales Stage"
+        
+        
+      - name:        salesStage 
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Sales Stage"
+        example: New Opportunity
+        
+      - name:        productLineID
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Siebel PL Id"
+        
+        
+      - name:        relevantForForecast
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Cameron Field "
+        
+        
+      - name:        subGeoMarketID
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "C4C Internal ID for Territory (GM)"
+        
+        
+      - name:        cameronBooking
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Cameron Booking Flag"
+        
+        
+      - name:        Account Category
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Account Category"
+        
+      - name:        Multi Product Line
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Flag if Opportunity has more than one Product Line "
+        
+        
+      - name:        numberofRigs
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Captures number of rigs associated with Opportunity"
+        
+        
+      - name:        bidDueDate
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Date the bid is due to customer"
+        
+        
+      - name:        closeDate
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Date we expect to hear from customer if we won or lost"
+        
+      - name:        createdByID
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Siebel Created by user ID"
+        
+
+      - name:        createdOn
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Custom field for Created On date"
+        
+
+      - name:        primaryMarketTheme
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "C4C Internal ID for Market Theme"
+        
+
+      - name:        primaryMarketThemeName
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Name of Market theme"
+        
+      - name:        opportunityType
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Description of the type of Opportunity"
+        
+
+      - name:        activityStatus
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Activity Status"
+        
+
+      - name:        updatedOn
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Custom field for Updated On"
+        
+
+      - name:        totalOpportunityValue
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Calculated field of all revenue line items"
+        
+
+      - name:        totalOpportunityValueCurrency
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Total opportunity value currency"
+        
+      - name:        totalWeightedForecast
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Calculated field based on revenue X Award Probability X Activity Probability"
+
+      - name:        reasonWon/Loss
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Reason Won/Loss"
+
+      - name:        siebelRowID
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Opportunity ID from Siebel"
+
+      - name:        subGeoMarket
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Sub Geo-Market"
+
+
+      - name:        country
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: "Country"
+
+      security:
+        - BasicAuth: []
+      
+      responses:
+        200:
+          description: "EntitySet OpportunityCollection"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/opportunityCollection'
+            
+        400:
+          description: "Invalid Tag"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/400'
+        401:
+          description: "Unauthorized access"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'                
+        500:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/500'
+      
+    # post:
+    #   tags:
+    #   - "API Environment "
+
+    #   summary:  "(Post Opportunity entries)"
+    #   description: "Post a new entity to entity set OpportunityCollection"
+    #   parameters:
+    #   - name: OpportunityCollection
+    #     in: body 
+    #     description:  "The new Entity"
+    #     schema:
+    #       $ref: '#/definitions/opp_entity'        
+    #   responses:
+    #     201:
+    #       description: "Created Entity"
+    #       schema: 
+    #         type: string
+    #         example: "Created Entity"
+    #     default:
+    #       description: "Unexpected Error"
+    #       schema: 
+    #         $ref: '#/definitions/error'
+            
+  
+  /Opportunities/{opportunityID}:
+    get:
+      tags:
+      - "API Environment "
+      summary:  "(Get Opportunity entry by key)"
+      description: "Returns a single opportunity based on the entered key (ID) "
+      parameters:
+      - name: "opportunityID"
+        in: path
+        schema:
+          type: integer
+          format: int64
+        description: "ID of Opportunity to be returned"
+        required: true
+
+      security:
+        - BasicAuth: []
+        
+      responses:
+        200:
+          description: "EntitySet OpportunityCollection"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/opportunity'
+
+        308:
+          description: "Request has been suspended"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/308'
+
+        400:
+          description: "Invalid Tag"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/400'
+
+        401:
+          description: "Unauthorized access"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'                
+
+        404:
+          description: "Opportunity not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404'                
+
+        500:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/500'
+
+  /Opportunities/{opportunityID}/OpportunityItems:
+    get:
+      tags:
+      - "API Environment "
+      summary:  "(Get OpportunityItem list by key)"
+      description: "Returns collection of opportunity items or returns an empty collection"
+      parameters:
+      - name: "opportunityID"
+        in: path
+        schema:
+          type: integer
+          format: int64
+        description: "ID of Opportunity to be returned"
+        required: true
+
+      security:
+        - BasicAuth: []
+        
+      responses:
+        200:
+          description: "Suucessful Operation"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/opportunityItems'
+
+        308:
+          description: "Request has been suspended"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/308'
+
+        400:
+          description: "Invalid Tag"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/400'
+        401:
+          description: "Unauthorized access"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'                
+        404:
+          description: "Opportunity not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404'                
+
+        500:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/500'
+
+  # /Opportunities/{OpportunityID}/OpportunityItem/{lineItemId}:
+  #   get:
+  #     tags:
+  #     - "API Environment "
+  #     summary:  "(Get OpportunityItem list by key)"
+  #     description: "Returns the entity with the key from OpportunityAppointmentSalesActivityCollection"
+  #     parameters:
+  #     - name: "OpportunityID"
+  #       in: path
+  #       schema:
+  #         type: integer
+  #         format: int64
+  #       description: "ID of Opportunity to be returned"
+  #       required: true
+
+  #     security:
+  #       - BasicAuth: []
+        
+  #     responses:
+  #       200:
+  #         description: "EntitySet OpportunityCollection"
+  #         content:
+  #           application/json:
+  #             schema: 
+  #               $ref: '#/components/schemas/opp_item'
+
+  #       400:
+  #         description: "Invalid Tag"
+  #         content:
+  #           application/json:
+  #             schema: 
+  #               $ref: '#/components/schemas/400'
+  #       401:
+  #         description: "Unauthorized access"
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: '#/components/schemas/401'                
+  #       500:
+  #         description: "Bad Request"
+  #         content:
+  #           application/json:
+  #             schema: 
+  #               $ref: '#/components/schemas/500'
+
+  # /Opportunities/{OpportunityID}/OpportunityItem/{lineItemId}/OpportunityItemRevenuePlanReporting:
+  #   get:
+  #     tags:
+  #     - "API Environment "
+  #     summary:  "(Get OpportunityItem list by key)"
+  #     description: "Returns the entity with the key from OpportunityAppointmentSalesActivityCollection"
+  #     parameters:
+  #     - name: "OpportunityID"
+  #       in: path
+  #       schema:
+  #         type: integer
+  #         format: int64
+  #       description: "ID of Opportunity to be returned"
+  #       required: true
+
+  #     security:
+  #       - BasicAuth: []
+        
+  #     responses:
+  #       200:
+  #         description: "EntitySet OpportunityCollection"
+  #         content:
+  #           application/json:
+  #             schema: 
+  #               $ref: '#/components/schemas/revenue_item'
+
+  #       400:
+  #         description: "Invalid Tag"
+  #         content:
+  #           application/json:
+  #             schema: 
+  #               $ref: '#/components/schemas/400'
+  #       401:
+  #         description: "Unauthorized access"
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: '#/components/schemas/401'                
+  #       500:
+  #         description: "Bad Request"
+  #         content:
+  #           application/json:
+  #             schema: 
+  #               $ref: '#/components/schemas/500'
+
+
+    # patch:
+    #   tags:
+    #   - "API Environment "
+    #   summary:  "(Update Entity in Entity-Set : OpportunityCollection)"
+    #   description: "Update entity in EntitySet OpportunityAppointmentSalesActivityCollection"
+    #   parameters:
+    #   - name: "ObjectID"
+    #     in: path
+    #     type: string
+    #     description: "Key : ObjectID"
+    #     required: true
+        
+    #   - name: OpportunityCollection
+    #     in: body 
+    #     description:  "Entity to patch"
+    #     schema:
+    #       $ref: '#/definitions/opp_entity'
+
+    #   responses:
+    #     204:
+    #       description: "Empty response"
+    #       schema: 
+    #         type: string
+    #         example: "Empty Response"
+          
+    #     default:
+    #       description: "Unexpected Error"
+    #       schema: 
+    #         $ref: '#/definitions/error'
+
+    # delete:
+    #   tags:
+    #   - "API Environment "
+    #   summary:  "(Delete Opportunity Entities)"
+    #   description: "Get entities from entity set OpportunityAppointmentSalesActivityCollection"
+    #   parameters:
+    #   - name: "ObjectID"
+    #     in: path
+    #     type: string
+    #     description: "Key : ObjectID"
+    #     required: true
+        
+    #   - name: "$If-Match"
+    #     in: header
+    #     type: string
+    #     description: "If-Match header"
+
+    #   responses:
+    #     204:
+    #       description: "Empty response"
+    #       schema: 
+    #         type: string
+    #         example: Empty response
+          
+    #     default:
+    #       description: "Unexpected Error"
+    #       schema: 
+    #         $ref: '#/definitions/error'
+
+
+components:
+  securitySchemes:
+    # BasicAuth:
+    #   type: http
+    #   scheme: basic
+    
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+
+  schemas:
+    opportunityCollection:
+      properties:
+
+        self:
+          type: string
+          format: uri
+          description: "Link to the current opportunity collection"
+        kind:
+          type: string
+          example: opportunityCollection
+          description: "Kind of resource (Here : opportunityCollection)"
+          
+        contents:
+          type: array
+          items:
+            type: object
+            properties:
+              
+              self:
+                type: string
+                format: uri
+                description: "Link to the current opportunity"
+              
+              kind: 
+                type: string
+                example: opportunityCollection
+                description: "Kind of resource (Here : opportunity)"
+              
+              opportunityID:
+                type: string
+        
+
+              citation:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    example: "opportunityCollection"
+
+                  originator:
+                    type: string
+                    example: "my329276.crm.ondemand.com"
+
+                  creation:
+                    type: string
+                    example: "2019-07-11T07:08:34.801Z"
+
+                  format:
+                    type: string
+                    example: "OpenApi 3.0.0"
+                    
+                              
+              revEndDate:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+    
+              revStartDate:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+    
+              ID:
+                type: string
+                example: 537236
+
+              opportunityName:
+                type: string
+                example: CPL-EUR-Italy-CC-Eni-2018-Safety Valve Development
+
+              accountId:
+                type: string
+    
+              salesCycle:
+                type: string
+    
+              salesCycleText:
+                type: string
+    
+              salesStageCode:
+                type: string
+                example: Z01
+  
+              salesStage :
+                type: string
+                example: New Opportunity
+
+              productLineID:
+                type: string
+                example: 1-5ZBJV1
+
+              relevantforForecast:
+                type: string
+                example: Yes
+
+              subGeoMarketId:
+                type: string
+                example: 314
+              cameronBooking:
+                type: string
+                example: Yes
+              accountCategory:
+                type: string
+                example: Sales Account 
+              multiProductLine:
+                type: string
+                example: No
+              numberOfRigs:
+                type: string
+                example: 3
+              bidDueDate:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+              closeDate:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+              createdById:
+                type: string
+                example: 1-RWHNKP
+              createdOn:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+              primaryMarketTheme:
+                type: string
+                example: PT11
+              primaryMarketThemeName:
+                type: string
+                example: Conventional gas
+              opportunityType:
+                type: string
+                example: New Tender
+              activityStatus:
+                type: string
+                example: Workover
+              updatedOn:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+              totalOpportunityValue:
+                type: string
+                example: 100000000
+              totalOpportunityValueCurrency:
+                type: string
+                example: USD
+              totalWeightedForecast:
+                type: string
+                example: 500000000
+              reasonWon/Loss:
+                type: string
+                example: Unacceptable Contract Terms
+              siebelRowId:
+                type: string
+                example: 1-18XCKA
+              subGeoMarket:
+                type: string
+                example: EUR-EURW-Europe West
+              country:
+                type: string
+                example: Italy
+
+              OpportunityItem:
+                $ref: '#/components/schemas/opportunityItems'
+                nullable: true
+              # OpportunityItem:
+              #   anyOf:
+              #   - $ref: '#/components/schemas/opportunityItem'
+              #   - type: array
+              #     nullable: true
+
+        Paging:
+          type: object
+          properties:
+            pageOf:
+              type: string
+            next:
+              type: string
+            previous:
+              type: string
+                  
+    opportunity:
+      properties:
+              self:
+                type: string
+                format: uri
+                description: "Link to the current opportunity"
+              
+              kind: 
+                type: string
+                example: opportunityCollection
+                description: "Kind of resource (Here : opportunity)"
+              
+              opportunityID:
+                type: string
+        
+
+              citation:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    example: "opportunity"
+
+                  originator:
+                    type: string
+                    example: "my329276.crm.ondemand.com"
+
+                  creation:
+                    type: string
+                    example: "2019-07-11T07:08:34.801Z"
+
+                  format:
+                    type: string
+                    example: "OpenApi 3.0.0"
+                    
+                              
+              revEndDate:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+    
+              revStartDate:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+    
+              ID:
+                type: string
+                example: 537236
+
+              opportunityName:
+                type: string
+                example: CPL-EUR-Italy-CC-Eni-2018-Safety Valve Development
+
+              accountId:
+                type: string
+    
+              salesCycle:
+                type: string
+    
+              salesCycleText:
+                type: string
+    
+              salesStageCode:
+                type: string
+                example: Z01
+  
+              salesStage :
+                type: string
+                example: New Opportunity
+
+              productLineID:
+                type: string
+                example: 1-5ZBJV1
+
+              relevantforForecast:
+                type: string
+                example: Yes
+
+              subGeoMarketId:
+                type: string
+                example: 314
+              cameronBooking:
+                type: string
+                example: Yes
+              accountCategory:
+                type: string
+                example: Sales Account 
+              multiProductLine:
+                type: string
+                example: No
+              numberOfRigs:
+                type: string
+                example: 3
+              bidDueDate:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+              closeDate:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+              createdById:
+                type: string
+                example: 1-RWHNKP
+              createdOn:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+              primaryMarketTheme:
+                type: string
+                example: PT11
+              primaryMarketThemeName:
+                type: string
+                example: Conventional gas
+              opportunityType:
+                type: string
+                example: New Tender
+              activityStatus:
+                type: string
+                example: Workover
+              updatedOn:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+              totalOpportunityValue:
+                type: string
+                example: 100000000
+              totalOpportunityValueCurrency:
+                type: string
+                example: USD
+              totalWeightedForecast:
+                type: string
+                example: 500000000
+              reasonWon/Loss:
+                type: string
+                example: Unacceptable Contract Terms
+              siebelRowId:
+                type: string
+                example: 1-18XCKA
+              subGeoMarket:
+                type: string
+                example: EUR-EURW-Europe West
+              country:
+                type: string
+                example: Italy
+
+              opportunityItems:
+                $ref: '#/components/schemas/opportunityItems'
+                nullable: true
+              # OpportunityItem:
+              #   anyOf:
+              #   - $ref: '#/components/schemas/opportunityItem'
+              #   - type: array
+              #     nullable: true
+
+    opportunityItems:
+      properties:
+        
+        self:
+          type: string
+          format: uri
+          description: "Link to the current opportunity item"
+        
+        kind: 
+          type: string
+          example: opportunityItem
+          description: "Kind of resource"
+        
+        productId:
+          type: string
+
+        technology:
+          type: string
+                              
+        productDescription:
+          type: string
+                              
+        uantity:
+          type: string
+                              
+        lineItemId:
+          type: string
+                              
+        subSubProductLineId:
+          type: string
+                              
+        subProductLineId:
+          type: string
+                              
+        subSubProductLine:
+          type: string
+
+    opportunityItemRevenuePlanningReporting:
+      properties:
+        externalKey:
+          type: string
+
+        opportunityItemExternalKey:
+          type: string
+                              
+        opportunityExternalKey:
+          type: string
+                              
+        recordNumber:
+          type: string
+                              
+        headerObjectID:
+          type: string
+                              
+        objectID:
+          type: string
+                              
+        parentObjectID:
+          type: string
+                              
+        distributionDate:
+          type: string
+
+        distributionAmount:
+          type: string
+
+        currencyCode:
+          type: string
+
+        reportingCurrencyDistributionAmount:
+          type: string
+
+    401:
+      description: "Unauthorized access"
+      properties:
+        fault:
+          type: object
+          properties:
+            faultstring:
+              type: string
+            detail:
+              type: object
+              properties:
+                errorcode:
+                  type: string
+
+    400:
+      description: "Invalid ID"
+      properties:
+        code:
+          type: string
+        type:
+          type: string
+        message:
+          type: string
+
+    500:
+      description: "Bad Request"
+      properties:
+        code:
+          type: string
+        type:
+          type: string
+        message:
+          type: string
+          
+    308:
+      description: "Request has been suspended"
+      properties:
+        code:
+          type: string
+          example: 0
+        type:
+          type: string
+        message:
+          type: string
+          
+    404:
+      description: "Customer not found"
+      properties:
+        code:
+          type: string
+          example: 0
+        type:
+          type: string
+        message:
+          type: string
