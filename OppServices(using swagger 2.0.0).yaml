@@ -299,43 +299,31 @@ paths:
       responses:
         200:
           description: "<b>Response generated successfully</b>"
-           
-             
           schema: 
                  $ref: '#/definitions/revenueLineItems'
 
         308:
           description: "<b>Suspended Request Error</b>"
-           
-             
           schema: 
                  $ref: '#/definitions/308'
 
         400:
           description: "<b>Invalid Tag</b>"
-           
-             
           schema: 
                  $ref: '#/definitions/400'
 
         401:
           description: "<b>Unauthorized Access Error</b>"
-           
-             
           schema:
                  $ref: '#/definitions/401'                
 
         404:
           description: "<b>Opportunity Not Dound Error</b>"
-           
-             
           schema:
                  $ref: '#/definitions/404'                
 
         500:
           description: "<b>Internal Server Error</b>"
-           
-             
           schema: 
                  $ref: '#/definitions/500'
 
@@ -366,43 +354,31 @@ paths:
       responses:
         200:
           description: "<b>Response generated successfully</b>"
-           
-             
           schema: 
                  $ref: '#/definitions/revenueLineItems'
 
         308:
           description: "<b>Suspended Request Error</b>"
-           
-             
           schema: 
                  $ref: '#/definitions/308'
 
         400:
           description: "<b>Invalid Tag</b>"
-           
-             
           schema: 
                  $ref: '#/definitions/400'
 
         401:
           description: "<b>Unauthorized Access Error</b>"
-           
-             
           schema:
                  $ref: '#/definitions/401'                
 
         404:
           description: "<b>Opportunity Not Dound Error</b>"
-           
-             
           schema:
                  $ref: '#/definitions/404'                
 
         500:
           description: "<b>Internal Server Error</b>"
-           
-             
           schema: 
                  $ref: '#/definitions/500'
 
@@ -444,7 +420,6 @@ definitions:
               opportunityID:
                 type: string
         
-
               citation:
                 type: object
                 properties:
@@ -464,7 +439,6 @@ definitions:
                     type: string
                     example: "OpenApi 3.0.0"
                     
-                              
               revEndDate:
                 type: string
                 example: "2019-07-11T07:08:34.801Z"
@@ -509,70 +483,89 @@ definitions:
               subGeoMarketId:
                 type: string
                 example: 314
+              
               cameronBooking:
                 type: string
                 example: true
+              
               accountCategory:
                 type: string
                 example: Sales Account 
+              
               multiProductLine:
                 type: string
                 example: false
+              
               numberOfRigs:
                 type: string
                 example: 3
+              
               bidDueDate:
                 type: string
                 example: "2019-07-11T07:08:34.801Z"
+              
               closeDate:
                 type: string
                 example: "2019-07-11T07:08:34.801Z"
+              
               createdById:
                 type: string
                 example: 1-RWHNKP
+              
               createdOn:
                 type: string
                 example: "2019-07-11T07:08:34.801Z"
+              
               primaryMarketTheme:
                 type: string
                 example: PT11
+              
               primaryMarketThemeName:
                 type: string
                 example: Conventional gas
+              
               opportunityType:
                 type: string
                 example: New Tender
+              
               activityStatus:
                 type: string
                 example: Workover
+              
               updatedOn:
                 type: string
                 example: "2019-07-11T07:08:34.801Z"
+              
               totalOpportunityValue:
                 type: string
                 example: 100000000
+              
               totalOpportunityValueCurrency:
                 type: string
                 example: USD
+              
               totalWeightedForecast:
                 type: string
                 example: 500000000
+              
               reasonWon/Loss:
                 type: string
                 example: Unacceptable Contract Terms
+              
               siebelRowId:
                 type: string
                 example: 1-18XCKA
+              
               subGeoMarket:
                 type: string
                 example: EUR-EURW-Europe West
+              
               country:
                 type: string
                 example: Italy
 
               revenueLineItem:
                  $ref: '#/definitions/revenueLineItems'
-
 
         Paging:
           type: object
@@ -598,8 +591,7 @@ definitions:
               
               opportunityID:
                 type: string
-        
-
+      
               citation:
                 type: object
                 properties:
