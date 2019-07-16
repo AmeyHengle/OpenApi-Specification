@@ -211,6 +211,10 @@ paths:
         type: integer
         format: int64
         description: "Skips the first n records, where 'n' corresponds to the specified integer input value.<br> Example: <b> 10 </b>"
+
+      produces:
+      - application/json
+      - application/xml
  
       responses:
         200:
@@ -232,7 +236,7 @@ paths:
           schema: 
                  $ref: '#/definitions/500'
                 
-  /Opportunities/{opportunityID}:
+  /Opportunities/{opportunity-id}:
     get:
       tags:
       - "API Environment "
@@ -241,13 +245,17 @@ paths:
       security:
        - ApiKeyAuth: []
       parameters:
-      - name: "opportunityID"
+      - name: "opportunity-id"
         in: path
         type: integer
         format: int64
         description: "ID of Opportunity to be returned"
         required: true
-
+      
+      produces:
+      - application/json
+      - application/xml
+      
       responses:
         200:
           description: "<b>Response generated successfully</b>"
@@ -255,7 +263,7 @@ paths:
                  $ref: '#/definitions/opportunity'
 
         308:
-          description: "<b>Suspended Request Error</b>"
+          description: "<b>Permanent Redirect Error</b>"
           schema: 
                  $ref: '#/definitions/308'
 
@@ -296,6 +304,10 @@ paths:
         description: "ID of Opportunity to be returned"
         required: true
 
+      produces:
+      - application/json
+      - application/xml
+
       responses:
         200:
           description: "<b>Response generated successfully</b>"
@@ -303,7 +315,7 @@ paths:
                  $ref: '#/definitions/revenueLineItems'
 
         308:
-          description: "<b>Suspended Request Error</b>"
+          description: "<b>Permanent Redirect Error</b>"
           schema: 
                  $ref: '#/definitions/308'
 
@@ -351,6 +363,10 @@ paths:
         description: "Line Item ID of Opportunity item"
         required: true
 
+      produces:
+      - application/json
+      - application/xml
+
       responses:
         200:
           description: "<b>Response generated successfully</b>"
@@ -358,7 +374,7 @@ paths:
                  $ref: '#/definitions/revenueLineItems'
 
         308:
-          description: "<b>Suspended Request Error</b>"
+          description: "<b>Permanent Redirect Error</b>"
           schema: 
                  $ref: '#/definitions/308'
 
@@ -420,6 +436,7 @@ definitions:
               opportunityID:
                 type: string
         
+
               citation:
                 type: object
                 properties:
@@ -439,6 +456,7 @@ definitions:
                     type: string
                     example: "OpenApi 3.0.0"
                     
+                              
               revEndDate:
                 type: string
                 example: "2019-07-11T07:08:34.801Z"
@@ -483,89 +501,70 @@ definitions:
               subGeoMarketId:
                 type: string
                 example: 314
-              
               cameronBooking:
                 type: string
                 example: true
-              
               accountCategory:
                 type: string
                 example: Sales Account 
-              
               multiProductLine:
                 type: string
                 example: false
-              
               numberOfRigs:
                 type: string
                 example: 3
-              
               bidDueDate:
                 type: string
                 example: "2019-07-11T07:08:34.801Z"
-              
               closeDate:
                 type: string
                 example: "2019-07-11T07:08:34.801Z"
-              
               createdById:
                 type: string
                 example: 1-RWHNKP
-              
               createdOn:
                 type: string
                 example: "2019-07-11T07:08:34.801Z"
-              
               primaryMarketTheme:
                 type: string
                 example: PT11
-              
               primaryMarketThemeName:
                 type: string
                 example: Conventional gas
-              
               opportunityType:
                 type: string
                 example: New Tender
-              
               activityStatus:
                 type: string
                 example: Workover
-              
               updatedOn:
                 type: string
                 example: "2019-07-11T07:08:34.801Z"
-              
               totalOpportunityValue:
                 type: string
                 example: 100000000
-              
               totalOpportunityValueCurrency:
                 type: string
                 example: USD
-              
               totalWeightedForecast:
                 type: string
                 example: 500000000
-              
               reasonWon/Loss:
                 type: string
                 example: Unacceptable Contract Terms
-              
               siebelRowId:
                 type: string
                 example: 1-18XCKA
-              
               subGeoMarket:
                 type: string
                 example: EUR-EURW-Europe West
-              
               country:
                 type: string
                 example: Italy
 
               revenueLineItem:
                  $ref: '#/definitions/revenueLineItems'
+
 
         Paging:
           type: object
@@ -591,7 +590,8 @@ definitions:
               
               opportunityID:
                 type: string
-      
+        
+
               citation:
                 type: object
                 properties:
@@ -848,7 +848,7 @@ definitions:
           example: "Api Internal Error"
           
     308:
-      description: "<b>Request Suspended </b><br> 308 Permanent Redirect redirect status response code indicates that the resource requested has been definitively moved to the URL given by the Location headers. A browser redirects to this page and search engines update their links to the resource (in 'SEO-speak', it is said that the 'link-juice' is sent to the new URL)."
+      description: "<b>Permanent Redirect </b><br> 308 Permanent Redirect redirect status response code indicates that the resource requested has been definitively moved to the URL given by the Location headers. A browser redirects to this page and search engines update their links to the resource (in 'SEO-speak', it is said that the 'link-juice' is sent to the new URL)."
       properties:
         code:
           type: string
