@@ -1,0 +1,889 @@
+swagger: "2.0"
+info:
+  title: Opportunity Service
+  description: API to access C4C Opportunities (Data Classification _ SLB Confidential)
+  version: 0.1.9
+  contact:
+    name: "Contact: Vignesh Dharmaraj"
+    email: "VDharmaraj@slb.com"
+    url: "https://intouchsupport.com/index.cfm?event=content.preview&contentId=7009338"
+  license:
+    name: "License: Schlumberger proprietary"
+    url: "https://www.slb.com"
+
+schemes:
+  - https
+host: "apigateway.evq.it.slb.com"
+basePath: /api/v1/ 
+
+  
+paths:
+  /Opportunities:
+    get:
+      tags:
+      - "API Environment "
+      summary:  "(Get Opportunity entries)"
+      description: "Returns a collection of opportunities"
+      security:
+       - ApiKeyAuth: []
+       - basicAuth: []
+      parameters:
+      
+      - name: ID
+        in: query
+        type: integer
+        format: int64
+        description: "C4C Opportunity ID                                                                <br> Example: <b>537336</b>"
+                  
+      - name: opportunityName
+        in: query
+        type: string
+        description: "Describes the name of the Opportunity. The naming convention should describe the customers project or scope of work.  <br> Example: <b>CPL-EUR-Italy-CC-Eni-2018-Safety Valve Development</b> etc."
+        
+      - name: accountID
+        in: query
+        type: integer
+        format: int64
+        description: "This is the C4C Account ID the opportunity is associated to.<br> Example: <b>1041252</b>, <b>1367812</b> etc."
+
+      - name: opportunityType
+        in: query
+        type: string
+        format: uri
+        description: "Description of the type of Opportunity                              <br>Examples are:  <b>New Opportunity</b>, <b>New Tender</b>, <b>Encroachment</b> etc."
+        pattern: "[A-Z]+"
+
+      - name: awardProbability
+        in: query
+        type: integer
+        format: int64
+        description: "The probability of success of winning the opportunity.  It is predefined in 10% increments from 0-100%.<br> Example: <b>10</b>"
+
+      - name: bidDueDate
+        in: query
+        type: string
+        format: date-time
+        description: "The date a commercial proposal should be submitted by. In the event of separate technical and commercial submissions, it will be the commercial submission date that is used. <br> <b>ISO-8601 notation:</b>   yyyy-mm-ddThh:mm:ss.ffffff  <br><br><i>Example: 2008-09-15T15:53:00</i>"
+        
+      - name: closeDate
+        in: query
+        type: string
+        format: date-time
+        description: " Expected date Opportunity is to be awarded and communicated to all parties. <br> <b>ISO-8601 notation:</b>   yyyy-mm-ddThh:mm:ss.ffffff  <br><br><i>Example: 2008-09-15T15:53:00</i>"
+
+      - name: revStartDate
+        in: query
+        type: string
+        format: date-time
+        description: "First potential date revenue can be accrued against the opportunity/contract <br> <b>ISO-8601 notation:</b>   yyyy-mm-ddThh:mm:ss.ffffff  <br><br><i>Example: 2008-09-15T15:53:00</i>"
+                  
+      - name: revEndDate
+        in: query
+        type: string
+        format: date-time
+        description: "Last day revenue can be accrued against the opportunity / contract <br> <b>ISO-8601 notation:</b>   yyyy-mm-ddThh:mm:ss.ffffff  <br><br><i>Example: 2008-09-15T15:53:00</i>"
+                
+      - name: salesStage 
+        in: query
+        type: string
+        description: "The Opportunity Sales stage is used to ensure that Schlumberger is aligned with the customer procurement process.<br>Example: <b>Unconverted</b>, <b>Engagement</b>, <b>Proposal Preparation</b> etc."
+        pattern: "[A-Z]+"
+        
+      - name: productLineID
+        in: query
+        type: string
+        description: "This is the Siebel ID for the Product Line.   <br> Example: <b>1-5ZBJV1</b>"
+
+      - name: multiProductLine
+        in: query
+        type: boolean
+        description: "Binary flag that indicates if more than one Product Line is associated to the opportunity. <br> Example: <b>true / false</b>"
+
+      - name: subGeoMarket
+        in: query
+        type: string
+        description: "The name of the Sub GeoMarket the work is to be conducted in.<br> Example: <b>EUR-EURW-EuropeWest</b>"
+
+      - name: cameronBooking
+        in: query
+        type: boolean
+        description: "Indicator that specifies the Opportunity is a Cameron Booking Opportunity.<br> Example: <b>true / false</b>"
+
+
+      - name: primaryMarketTheme
+        in: query
+        type: string
+        description: "Name of Market theme                                                <br> Example: <b>Conventional Gas, Crude Oil</b> etc."
+
+      - name: activityStatus
+        in: query
+        type: string
+        description: "Defines the stage in the field development process.                 <br> Example: <b>Workover</b>, <b>Exploration</b>, <b>Development</b> etc."
+                  
+      - name: totalOpportunityValue
+        in: query
+        type: integer
+        format: int64
+        description: "Defined as the total potential value of the opportunity before either the award or activity probabilities are applied.<br> Example: <b>100,000.00</b>"
+        
+      - name: totalWeightedForecast
+        in: query
+        type: integer
+        format: int64
+        description: "Derived by multiplying the Award Probability by the Revenue Probability by the Opportunity Value.<br> Example: <b>50,000.00</b>"
+        
+      - name: country
+        in: query
+        type: string
+        description: "Name of the Country the work is to be conducted in.<br>Represented as ISO-3166 country code used to represent a country   <br>Also called <i>ISO 3166-1 Alpha-2 code </i><br>ISO Country Code: <br> {<br> type: string <br> pattern: [A-Z] {2} <br> Example: <b>US</b> <br>}"
+        pattern: "^[A-Z]{2}$"
+
+      - name: createdOn
+        in: query
+        type: string
+        format: date-time
+        description: "Custom field for Created On date <br> <b>ISO-8601 notation:</b>   yyyy-mm-ddThh:mm:ss.ffffff  <br><br><i>Example: 2008-09-15T15:53:00</i>"
+
+      - name: updatedOn
+        in: query
+        type: string
+        format: date-time
+        description: "Custom field for Updated On <br> <b>ISO-8601 notation:</b>   yyyy-mm-ddThh:mm:ss.ffffff  <br><br><i>Example: 2008-09-15T15:53:00</i>"
+                
+      - name: size
+        in: query
+        type: integer
+        format: int64
+        description: "Page Size is used to specify the size of each response body.<br>Generally the size specifies the total number of records to be returned on a single get request.<br> Example: <b>20</b>"
+        
+      - name: searchAfter
+        in: query
+        type: integer
+        format: int64
+        description: "Skips the first n records, where 'n' corresponds to the specified integer input value.<br> Example: <b> 10 </b>"
+
+      produces:
+      - application/json
+      - application/xml
+ 
+      responses:
+        200:
+          description: "<b>Response generated successfully </b>"
+          schema: 
+                 $ref: '#/definitions/opportunities'
+            
+        400:
+          description: "<b>Invalid Tag Error</b>"
+          schema: 
+                 $ref: '#/definitions/400'
+      
+        401:
+          description: "<b>Unauthorized Access Error</b>"
+          schema:
+                 $ref: '#/definitions/401'                
+        500:
+          description: "<b>Internal Server Error</b>"
+          schema: 
+                 $ref: '#/definitions/500'
+                
+  /Opportunities/{opportunity-id}:
+    get:
+      tags:
+      - "API Environment "
+      summary:  "(Get Opportunity entry by opportunity-id)"
+      description: "Returns a single opportunity based on the entered key (ID) "
+      security:
+       - ApiKeyAuth: []
+       - basicAuth: []
+      parameters:
+      - name: "opportunity-id"
+        in: path
+        type: integer
+        format: int64
+        description: "ID of Opportunity to be returned <br>Example: <b>54466</b>"
+        required: true
+      
+      produces:
+      - application/json
+      - application/xml
+      
+      responses:
+        200:
+          description: "<b>Response generated successfully</b>"
+          schema: 
+                 $ref: '#/definitions/opportunity'
+
+        400:
+          description: "<b>Invalid Tag</b>"
+          schema: 
+                 $ref: '#/definitions/400'
+
+        401:
+          description: "<b>Unauthorized Access Error</b>"
+          schema:
+                 $ref: '#/definitions/401'                
+
+        404:
+          description: "<b>Opportunity Not found Error</b>"
+          schema:
+                 $ref: '#/definitions/404'                
+
+        500:
+          description: "<b>Internal Server Error</b>"
+          schema: 
+                 $ref: '#/definitions/500'
+
+  /Opportunities/{opportunityID}/revenueLineItems:
+    get:
+      tags:
+      - "API Environment "
+      summary:  "(Get revenueLineItem list by opportunity-id)"
+      description: "Returns collection of opportunity items or returns an empty collection"
+      security:
+       - ApiKeyAuth: []
+       - basicAuth: []
+
+      parameters:
+      - name: "opportunityID"
+        in: path
+        type: integer
+        format: int64
+        description: "ID of Opportunity to be returned<br>Example: <b>54466</b>"
+        required: true
+
+      produces:
+      - application/json
+      - application/xml
+
+      responses:
+        200:
+          description: "<b>Response generated successfully</b>"
+          schema: 
+                 $ref: '#/definitions/revenueLineItems'
+
+        308:
+          description: "<b>Permanent Redirect Error</b>"
+          schema: 
+                 $ref: '#/definitions/308'
+
+        400:
+          description: "<b>Invalid Tag</b>"
+          schema: 
+                 $ref: '#/definitions/400'
+
+        401:
+          description: "<b>Unauthorized Access Error</b>"
+          schema:
+                 $ref: '#/definitions/401'                
+
+        404:
+          description: "<b>Opportunity Not Dound Error</b>"
+          schema:
+                 $ref: '#/definitions/404'                
+
+        500:
+          description: "<b>Internal Server Error</b>"
+          schema: 
+                 $ref: '#/definitions/500'
+
+
+  /Opportunities/{opportunityID}/revenueLineItems/{lineItemId}/revenueForecasts:
+    get:
+      tags:
+      - "API Environment "
+      summary:  "(Get revenue Forecasts by the using combination of opportunity-id and revenue-line-item-id)"
+      description: "Get revenue Forecasts by the using combination of opportunity-id and revenue-line-item-id"
+      security:
+       - ApiKeyAuth: []
+       - basicAuth: []
+      parameters:
+      - name: "opportunityID"
+        in: path
+        type: integer
+        format: int64
+        description: "ID of Opportunity to be returned<br>Example: <b>54466</b>"
+        required: true
+
+      - name: "lineItemId"
+        in: path
+        type: integer
+        format: int64
+        description: "Line item ID of Revenue Line Item.<br>Example: <b>10</b>"
+        required: true
+
+      produces:
+      - application/json
+      - application/xml
+
+      responses:
+        200:
+          description: "<b>Response generated successfully</b>"
+          schema: 
+                 $ref: '#/definitions/revenueLineItem'
+
+        308:
+          description: "<b>Permanent Redirect Error</b>"
+          schema: 
+                 $ref: '#/definitions/308'
+
+        400:
+          description: "<b>Invalid Tag</b>"
+          schema: 
+                 $ref: '#/definitions/400'
+
+        401:
+          description: "<b>Unauthorized Access Error</b>"
+          schema:
+                 $ref: '#/definitions/401'                
+
+        404:
+          description: "<b>Opportunity Not Dound Error</b>"
+          schema:
+                 $ref: '#/definitions/404'                
+
+        500:
+          description: "<b>Internal Server Error</b>"
+          schema: 
+                 $ref: '#/definitions/500'
+
+securityDefinitions:
+  ApiKeyAuth:
+    type: apiKey
+    in: header
+    name: x-api-key
+  basicAuth:
+    type: basic
+ 
+definitions:
+    opportunities:
+      properties:
+
+        self:
+          type: string
+          format: uri
+          description: "Link to the current opportunity collection"
+        kind:
+          type: string
+          example: opportunityCollection
+          description: "Kind of resource (Here : opportunityCollection)"
+          
+        contents:
+          type: array
+          items:
+            type: object
+            properties:
+              
+              self:
+                type: string
+                format: uri
+                description: "Link to the current opportunity"
+              
+              kind: 
+                type: string
+                example: opportunityCollection
+                description: "Kind of resource (Here : opportunity)"
+              
+              opportunityID:
+                type: string
+        
+
+              citation:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    example: "opportunityCollection"
+
+                  originator:
+                    type: string
+                    example: "C4C"
+
+                  creation:
+                    type: string
+                    example: "2019-07-11T07:08:34.801Z"
+
+                  format:
+                    type: string
+                    example: "OpenApi 3.0.0"
+                   
+              ID:
+                type: string
+                example: 537236
+
+              opportunityName:
+                type: string
+                example: CPL-EUR-Italy-CC-Eni-2018-Safety Valve Development
+
+              accountId:
+                type: string
+                example: 1041152
+
+              opportunityType:
+                type: string
+                example: New Tender
+  
+              salesStage :
+                type: string
+                example: New Opportunity
+                
+              reasonWon/Loss:
+                type: string
+                example: Unacceptable Contract Terms
+                
+              productLineID:
+                type: string
+                example: 1-5ZBJV1
+                
+              productLine:
+                type: string
+                example: CPS - Completions
+
+              multiProductLine:
+                type: string
+                example: false
+
+              relevantforForecast:
+                type: string
+                example: true
+
+              subGeoMarketId:
+                type: string
+                example: 314
+ 
+              siebelRowId:
+                type: string
+                example: 1-18XCKA
+ 
+              subGeoMarket:
+                type: string
+                example: EUR-EURW-Europe West
+ 
+              country:
+                type: string
+                example: Italy
+
+              cameronBooking:
+                type: string
+                example: true
+ 
+              accountCategory:
+                type: string
+                example: Sales Account 
+ 
+              numberOfRigs:
+                type: string
+                example: 3
+ 
+              awardProbability:
+                type: string
+                example: 10
+
+              bidDueDate:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+ 
+              closeDate:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+
+              revEndDate:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+    
+              revStartDate:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+   
+              createdBy:
+                type: string
+                example: VDharmaraj
+ 
+              createdOn:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+ 
+              primaryMarketTheme:
+                type: string
+                example: Conventional gas
+ 
+              activityStatus:
+                type: string
+                example: Workover
+ 
+              updatedOn:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+ 
+              totalOpportunityValue:
+                type: string
+                example: 100000000
+ 
+              totalOpportunityValueCurrency:
+                type: string
+                example: USD
+ 
+              totalWeightedForecast:
+                type: string
+                example: 500000000
+ 
+              revenueLineItems:
+                 $ref: '#/definitions/revenueLineItems'
+
+
+        Paging:
+          type: object
+          properties:
+            pageOf:
+              type: string
+            next:
+              type: string
+            previous:
+              type: string
+                  
+    opportunity:
+      properties:
+              self:
+                type: string
+                format: uri
+                description: "Link to the current opportunity"
+              
+              kind: 
+                type: string
+                example: opportunityCollection
+                description: "Kind of resource (Here : opportunity)"
+              
+              opportunityID:
+                type: string
+      
+              citation:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    example: "opportunity"
+
+                  originator:
+                    type: string
+                    example: "my329276.crm.ondemand.com"
+
+                  creation:
+                    type: string
+                    example: "2019-07-11T07:08:34.801Z"
+
+                  format:
+                    type: string
+                    example: "OpenApi 3.0.0"
+                                                 
+    
+                   
+              ID:
+                type: string
+                example: 537236
+
+              opportunityName:
+                type: string
+                example: CPL-EUR-Italy-CC-Eni-2018-Safety Valve Development
+
+              accountId:
+                type: string
+                example: 1041152
+
+              opportunityType:
+                type: string
+                example: New Tender
+  
+              salesStage :
+                type: string
+                example: New Opportunity
+                
+              reasonWon/Loss:
+                type: string
+                example: Unacceptable Contract Terms
+                
+              productLineID:
+                type: string
+                example: 1-5ZBJV1
+                
+              productLine:
+                type: string
+                example: CPS - Completions
+
+              multiProductLine:
+                type: string
+                example: false
+
+              relevantforForecast:
+                type: string
+                example: true
+
+              subGeoMarketId:
+                type: string
+                example: 314
+ 
+              siebelRowId:
+                type: string
+                example: 1-18XCKA
+ 
+              subGeoMarket:
+                type: string
+                example: EUR-EURW-Europe West
+ 
+              country:
+                type: string
+                example: Italy
+
+              cameronBooking:
+                type: string
+                example: true
+ 
+              accountCategory:
+                type: string
+                example: Sales Account 
+ 
+              numberOfRigs:
+                type: string
+                example: 3
+ 
+              awardProbability:
+                type: string
+                example: 10
+
+              bidDueDate:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+ 
+              closeDate:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+
+              revEndDate:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+    
+              revStartDate:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+   
+              createdBy:
+                type: string
+                example: VDharmaraj
+ 
+              createdOn:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+ 
+              primaryMarketTheme:
+                type: string
+                example: Conventional gas
+ 
+              activityStatus:
+                type: string
+                example: Workover
+ 
+              updatedOn:
+                type: string
+                example: "2019-07-11T07:08:34.801Z"
+ 
+              totalOpportunityValue:
+                type: string
+                example: 100000000
+ 
+              totalOpportunityValueCurrency:
+                type: string
+                example: USD
+ 
+              totalWeightedForecast:
+                type: string
+                example: 500000000
+ 
+              revenueLineItems:
+                 $ref: '#/definitions/revenueLineItems'
+
+    revenueLineItems:
+      x-nullable: true
+      properties:
+        self:
+            type: string
+            format: uri
+            description: "Link to the current opportunity items collection"
+        kind:
+            type: string
+            example: opportunityRevenueLinesCollection
+            description: "Kind of resource (Here : revenueLineItems)"
+            
+        opportunityID:
+              type: string
+              example: 537236
+            
+        contents:
+            type: array
+            items:
+              type: object
+              properties:
+                lineItemId:
+                  type: string
+                  example: 10
+                  
+                subSubProductLine:
+                  type: string
+                  example: ALS - Electrical Submersibles-ESP
+                  
+                technology:
+                  type: string
+                  example: ALS - Submersible Pumps
+                
+                revenue:
+                  type: string
+                  example: 303871.000000
+                  
+                revenueProbablity:
+                  type: string
+                  example: 80%
+                  
+                revStartDate:
+                  type: string
+                  example: "2019-07-11T07:08:34.801Z"
+
+                revEndDate:
+                  type: string
+                  example: "2019-07-11T07:08:34.801Z"                  
+                                      
+                quantity:
+                  type: string
+                  example: 1.00000000000000
+                  
+                unitOfMeasure:
+                  type: string
+                  example: Each
+                                      
+                revenueType:
+                  type: string
+                  example: Performance-base lease
+
+    revenueLineItem:
+      properties:
+                opportunityID:
+                  type: string
+                  example: 537236
+                lineItemId:
+                  type: string
+                  example: 10
+                  
+                subSubProductLine:
+                  type: string
+                  example: ALS - Electrical Submersibles-ESP
+                  
+                technology:
+                  type: string
+                  example: ALS - Submersible Pumps
+                
+                revenue:
+                  type: string
+                  example: 303871.000000
+                  
+                revenueProbablity:
+                  type: string
+                  example: 80%
+                  
+                revStartDate:
+                  type: string
+                  example: "2019-07-11T07:08:34.801Z"
+
+                revEndDate:
+                  type: string
+                  example: "2019-07-11T07:08:34.801Z"                  
+                                      
+                quantity:
+                  type: string
+                  example: 1.00000000000000
+                  
+                unitOfMeasure:
+                  type: string
+                  example: Each
+                                      
+                revenueType:
+                  type: string
+                  example: Performance-base lease
+
+                  
+                revenueForecasts:
+                  $ref: '#/definitions/revenueForecasts'
+
+    revenueForecasts:
+      properties:
+        revenueForecast:
+          type: array
+          items:
+            type: object
+            properties:
+              forecastDistributionDate:
+                  type: string
+                  example: "2019-07-11T07:08:34.801Z"
+              forecastDistributionAmount:
+                  type: string
+                  example: "303871.000000"
+
+    401:
+      description: "<b>Unauthorized access</b><br> 401 Unauthorized client error status response code indicates that the request has not been applied because it lacks valid authentication credentials for the target resource."
+      properties:
+        code:
+          type: string
+          example: 401
+        type:
+          type: string
+          example: "Client-side Error"
+        message:
+          type: string
+          example: "Authentication Error"
+
+    400:
+      description: "<b>Bad Request (Invalid Id)</b>.<br> 400 Bad Request response status code indicates that the server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing)."
+      properties:
+        code:
+          type: string
+          example: 400
+        type:
+          type: string
+          example: "Client-side Error"
+        message:
+          type: string
+          example: "Bad Request"
+
+    500:
+      description: "<b>Internal Server Error </b>.<br> Server error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request."
+      properties:
+        code:
+          type: string
+          example: 500
+        type:
+          type: string
+          example: "Server-side Error"
+        message:
+          type: string
+          example: "Api Internal Error"
+          
+    308:
+      description: "<b>Permanent Redirect </b><br> 308 Permanent Redirect redirect status response code indicates that the resource requested has been definitively moved to the URL given by the Location headers. A browser redirects to this page and search engines update their links to the resource (in 'SEO-speak', it is said that the 'link-juice' is sent to the new URL)."
+      properties:
+        code:
+          type: string
+          example: 308
+        type:
+          type: string
+          example: "Client-side Error"
+        message:
+          type: string
+          example: "Permanent Redirect"
+          
+    404:
+      description: "<b>Customer not found</b><br>  404 Not Found client error response code indicates that the server can't find the requested resource. Links which lead to a 404 page are often called broken or dead links."
+      properties:
+        code:
+          type: string
+          example: 404
+        type:
+          type: string
+          example: "Client-side Error"
+        message:
+          type: string
+          example: "Resource not Found"
